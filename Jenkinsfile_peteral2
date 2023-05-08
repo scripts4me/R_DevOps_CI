@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                sh 'echo checkout'
+                sh 'echo Pipeline script from SCM peteral2'
+                checkout([$class: 'GitSCM', branches: [
+                    [name: '*/main']
+                ], extensions: [], userRemoteConfigs: [
+                    [url: 'https://github.com/scripts4me/R_DevOps_DevOpsDemo']
+                ]])
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo deploy'
+            }
+        }
+    }
+}
